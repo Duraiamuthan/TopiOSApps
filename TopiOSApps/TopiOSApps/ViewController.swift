@@ -8,13 +8,21 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,UISearchBarDelegate {
+
+    @IBOutlet weak var searchBariOSAppFilter: UISearchBar!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+         searchBariOSAppFilter.delegate=self
     }
-
+    
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        print("search buton clicked:\(String(describing: searchBar.text))")
+    }
 
 }
 
