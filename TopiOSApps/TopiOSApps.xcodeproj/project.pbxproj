@@ -40,6 +40,9 @@
 		45BD0B762431C3200073342B /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BD0B752431C3200073342B /* UIViewControllerExtension.swift */; };
 		45BD0B772431C3200073342B /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BD0B752431C3200073342B /* UIViewControllerExtension.swift */; };
 		45BD0B782431C3200073342B /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BD0B752431C3200073342B /* UIViewControllerExtension.swift */; };
+		45BD0B7A24320AD90073342B /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BD0B7924320AD90073342B /* StringExtension.swift */; };
+		45BD0B7B24320AD90073342B /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BD0B7924320AD90073342B /* StringExtension.swift */; };
+		45BD0B7C24320AD90073342B /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BD0B7924320AD90073342B /* StringExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +86,7 @@
 		45BD0B6824318C990073342B /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		45BD0B6D2431904B0073342B /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
 		45BD0B752431C3200073342B /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		45BD0B7924320AD90073342B /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,6 +211,7 @@
 			children = (
 				45BD0B6D2431904B0073342B /* ImageExtension.swift */,
 				45BD0B752431C3200073342B /* UIViewControllerExtension.swift */,
+				45BD0B7924320AD90073342B /* StringExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -346,6 +351,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45BD0B5F24317D680073342B /* JsonModelClass.swift in Sources */,
+				45BD0B7A24320AD90073342B /* StringExtension.swift in Sources */,
 				45BD0B6924318C990073342B /* AppConstants.swift in Sources */,
 				45BD0B21243134DD0073342B /* TopAppResultsViewController.swift in Sources */,
 				45BD0B6E2431904B0073342B /* ImageExtension.swift in Sources */,
@@ -370,6 +376,7 @@
 				45BD0B5A24317D490073342B /* AppDetailTableViewCell.swift in Sources */,
 				45BD0B772431C3200073342B /* UIViewControllerExtension.swift in Sources */,
 				45BD0B6324317D680073342B /* GetAppCatalog.swift in Sources */,
+				45BD0B7B24320AD90073342B /* StringExtension.swift in Sources */,
 				45BD0B34243134DE0073342B /* TopiOSAppsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -385,6 +392,7 @@
 				45BD0B5B24317D490073342B /* AppDetailTableViewCell.swift in Sources */,
 				45BD0B782431C3200073342B /* UIViewControllerExtension.swift in Sources */,
 				45BD0B6424317D680073342B /* GetAppCatalog.swift in Sources */,
+				45BD0B7C24320AD90073342B /* StringExtension.swift in Sources */,
 				45BD0B3F243134DF0073342B /* TopiOSAppsUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

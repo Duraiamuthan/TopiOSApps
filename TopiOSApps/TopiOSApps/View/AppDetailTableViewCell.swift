@@ -12,7 +12,7 @@ class AppDetailTableViewCell: UITableViewCell {
     
     @IBOutlet weak var lblAppName: UILabel!
     @IBOutlet weak var imgAppIcon: UIImageView!
-
+    @IBOutlet weak var imgHeightConstraint: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,6 +23,10 @@ class AppDetailTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func setImageHeight(height:Float){
+        self.imgHeightConstraint.constant = CGFloat(height)
     }
 
 }
