@@ -19,5 +19,4 @@ struct AppConstants {
     static let searchPlaceHolderDefault = "Look up"
     static let customTableViewCellId = "AppDetailTableViewCell"
     static let lazyLoadingDefaultImageName = "ImageLazyLoadingPlaceHolder"
-    
 }
