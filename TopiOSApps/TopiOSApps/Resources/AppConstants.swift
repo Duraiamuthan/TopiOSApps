@@ -17,6 +17,8 @@ struct AppConstants {
     static let searchPlaceHolderOne = "Look up using app name"
     static let searchPlaceHolderTwo = "Look up using category name"
     static let searchPlaceHolderDefault = "Look up"
+    static let jsonbackupCopyName = "TopApps"
+    static let dataBackupExtension = "json"
     static let customTableViewCellId = "AppDetailTableViewCell"
     static let lazyLoadingDefaultImageName = "ImageLazyLoadingPlaceHolder"
     static let errorFetchingServerDataNotificationName = "ErrorFetchingServerData"
