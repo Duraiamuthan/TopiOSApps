@@ -64,7 +64,7 @@ class DownloadData: NSObject {
         let documentDirectoryUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
         let fileUrl = documentDirectoryUrl?.appendingPathComponent("topApps.json") as NSURL?
                 do {
-                    let data = try Data(contentsOf: fileUrl as! URL, options: .mappedIfSafe)
+                    let data = try Data(contentsOf: fileUrl! as URL, options: .mappedIfSafe)
                    return data
                  } catch {
                    return nil
