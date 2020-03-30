@@ -61,6 +61,11 @@ class TopAppResultsViewController: UIViewController,UISearchBarDelegate,UITableV
     
     // It brings the app related data
     func getData(refersh:Bool) {
+        //Show spinner
+        if (refersh == false){
+            self.showSpinner(onView: self.view)
+        }
+        
         GetAppCatalog.GetListOfApps { Entries in
              self.apps=Entries;
              self.appsOriginal=Entries;
@@ -70,7 +75,10 @@ class TopAppResultsViewController: UIViewController,UISearchBarDelegate,UITableV
                 if refersh {
                     self.refreshControl?.endRefreshing()
                 }
-                
+                else {
+                //Hide Spinner
+                self.removeSpinner()
+                }
                 //reload the table view
                 self.tblViewiOSAppFilterResults.reloadData()
              }
