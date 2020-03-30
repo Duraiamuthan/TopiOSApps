@@ -38,6 +38,14 @@ class TopAppResultsViewController: UIViewController,UISearchBarDelegate,UITableV
         
         // get the app data
         self.getData(refersh: false)
+        
+        if traitCollection.userInterfaceStyle == .dark {
+            self.tblViewiOSAppFilterResults.backgroundColor = .black
+            self.view.backgroundColor = .black
+        } else {
+            self.tblViewiOSAppFilterResults.backgroundColor = .white
+            self.view.backgroundColor = .white
+        }
     }
     
     // MARK: - Segues
@@ -118,7 +126,13 @@ class TopAppResultsViewController: UIViewController,UISearchBarDelegate,UITableV
         cell.imgAppIcon.image = placeholderImage
 
         cell.imgAppIcon.downloadImageFrom(link: appMeta?.imImage[0].label, contentMode: UIView.ContentMode.scaleAspectFit)
-
+        
+        if traitCollection.userInterfaceStyle == .dark {
+          cell.lblAppName.backgroundColor = .black
+        } else {
+          cell.lblAppName.backgroundColor = .white
+          cell.backgroundColor = .white
+        }
         return cell
     }
 
