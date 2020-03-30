@@ -46,6 +46,16 @@ class TopAppResultsViewController: UIViewController,UISearchBarDelegate,UITableV
             self.tblViewiOSAppFilterResults.backgroundColor = .white
             self.view.backgroundColor = .white
         }
+        
+        //Notification center
+        let nc = NotificationCenter.default
+        
+        //Adding observer for server related connection error
+        nc.addObserver(self, selector: #selector(onErrorFetchingServerData(_:)), name: Notification.Name(AppConstants.errorFetchingServerDataNotificationName), object: nil)
+        
+        //Adding observer for data error
+        nc.addObserver(self, selector: #selector(onDataError(_:)), name: Notification.Name(AppConstants.errorWithDataNotificationName), object: nil)
+
     }
     
     // MARK: - Segues
@@ -56,6 +66,37 @@ class TopAppResultsViewController: UIViewController,UISearchBarDelegate,UITableV
             appDetailVC?.detailText = object?.summary.label
         }
     }
+    
+    // MARK: - Notification center receipient methods
+    
+    // For handling network related error
+    @objc func onErrorFetchingServerData(_ notification:Notification) {
+        let err:Error? =  notification.object as? Error
+        
+        let errorCode = (err as NSError?)?.code
+        
+        print("ErrorCode:\(String(describing: errorCode))")
+        
+        let alert = UIAlertController(title: AppConstants.errorAlertTitle, message: AppConstants.errorMessageNetwork, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: AppConstants.errorAlertButton, style: UIAlertAction.Style.default, handler: nil))
+        
+         DispatchQueue.main.async() {
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    //For handling data related error
+    @objc func onDataError(_ notification:Notification) {
+        let alert = UIAlertController(title: AppConstants.errorAlertTitle, message: AppConstants.errorMessageData, preferredStyle: .alert)
+               
+               alert.addAction(UIAlertAction(title: AppConstants.errorAlertButton, style: UIAlertAction.Style.default, handler: nil))
+               
+                DispatchQueue.main.async() {
+                   self.present(alert, animated: true, completion: nil)
+               }
+    }
+
    
     // MARK: - Data for tableview
     

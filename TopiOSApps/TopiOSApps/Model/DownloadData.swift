@@ -15,8 +15,17 @@ class DownloadData: NSObject {
         let url = URL(string:AppConstants.dataURL)
         let task = URLSession.shared.dataTask(with: url!) {(data, response, error ) in
             if(error != nil){
+                
+                // Post error as notification
+                let nc = NotificationCenter.default
+                nc.post(name: Notification.Name(AppConstants.errorFetchingServerDataNotificationName), object: error)
+               
+               // Dcouments cache
                let documentsData = DownloadData.getDataDocumentsDirectory()
-                let bundleData = DownloadData.getDataBundle()
+               
+               // Backup copy
+               let bundleData = DownloadData.getDataBundle()
+                
                 if(documentsData != nil){
                     completion(documentsData)
                 }
