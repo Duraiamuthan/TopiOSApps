@@ -17,7 +17,14 @@ struct AppConstants {
     static let searchPlaceHolderOne = "Look up using app name"
     static let searchPlaceHolderTwo = "Look up using category name"
     static let searchPlaceHolderDefault = "Look up"
+    static let jsonbackupCopyName = "TopApps"
+    static let dataBackupExtension = "json"
     static let customTableViewCellId = "AppDetailTableViewCell"
     static let lazyLoadingDefaultImageName = "ImageLazyLoadingPlaceHolder"
-    
+    static let errorFetchingServerDataNotificationName = "ErrorFetchingServerData"
+    static let errorWithDataNotificationName = "ErrorWithServerData"
+    static let errorAlertTitle = "Error"
+    static let errorMessageNetwork = "There seems to be some issue getting the data from server so data is loaded from local cache"
+    static let errorMessageData = "There seems to be some problem with Data retrieved. Please contact administrator."
+    static let errorAlertButton = "Ok"
 }

@@ -15,8 +15,17 @@ class DownloadData: NSObject {
         let url = URL(string:AppConstants.dataURL)
         let task = URLSession.shared.dataTask(with: url!) {(data, response, error ) in
             if(error != nil){
+                
+                // Post error as notification
+                let nc = NotificationCenter.default
+                nc.post(name: Notification.Name(AppConstants.errorFetchingServerDataNotificationName), object: error)
+               
+               // Dcouments cache
                let documentsData = DownloadData.getDataDocumentsDirectory()
-                let bundleData = DownloadData.getDataBundle()
+               
+               // Backup copy
+               let bundleData = DownloadData.getDataBundle()
+                
                 if(documentsData != nil){
                     completion(documentsData)
                 }
@@ -37,7 +46,7 @@ class DownloadData: NSObject {
     // Gets JSON data from application bundle
     static func getDataBundle() -> Data?{
 
-        if let path = Bundle.main.path(forResource: "topApps", ofType: "json") {
+        if let path = Bundle.main.path(forResource: AppConstants.jsonbackupCopyName, ofType: AppConstants.dataBackupExtension) {
             do {
                   let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
                 return data
@@ -53,9 +62,9 @@ class DownloadData: NSObject {
 
         // Get the url of Persons.json in document directory
         let documentDirectoryUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
-        let fileUrl = documentDirectoryUrl?.appendingPathComponent("topApps.json") as NSURL?
+        let fileUrl = documentDirectoryUrl?.appendingPathComponent(AppConstants.jsonbackupCopyName+"."+AppConstants.dataBackupExtension) as NSURL?
                 do {
-                    let data = try Data(contentsOf: fileUrl as! URL, options: .mappedIfSafe)
+                    let data = try Data(contentsOf: fileUrl! as URL, options: .mappedIfSafe)
                    return data
                  } catch {
                    return nil
@@ -66,7 +75,7 @@ class DownloadData: NSObject {
     static func saveToJsonFile(jsonData:Data){
             // Get the url of Persons.json in document directory
             guard let documentDirectoryUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
-            let fileUrl = documentDirectoryUrl.appendingPathComponent("topApps.json")
+            let fileUrl = documentDirectoryUrl.appendingPathComponent(AppConstants.jsonbackupCopyName+"."+AppConstants.dataBackupExtension)
             do {
                 try jsonData.write(to: fileUrl, options: [])
             } catch {

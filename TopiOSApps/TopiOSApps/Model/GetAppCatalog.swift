@@ -20,6 +20,10 @@ class GetAppCatalog: NSObject {
                             }
                  }
                  catch{
+                    // Send notification for data error
+                    let nc = NotificationCenter.default
+                    nc.post(name: Notification.Name(AppConstants.errorWithDataNotificationName), object: nil)
+                    
                     completion(nil)
                  }
              };
