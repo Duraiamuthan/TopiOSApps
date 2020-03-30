@@ -246,12 +246,31 @@ class TopAppResultsViewController: UIViewController,UISearchBarDelegate,UITableV
         // Dark mode support
         if traitCollection.userInterfaceStyle == .dark {
             cell.lblAppName.backgroundColor = .black
+            cell.contentView.backgroundColor = .black
         } else {
             cell.lblAppName.backgroundColor = .white
-            cell.backgroundColor = .white
+            cell.contentView.backgroundColor = .white
         }
         
         return cell
     }
     
+    // MARK: - Dark mode
+    // To handle dark mode
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        self.tblViewiOSAppFilterResults.reloadData()
+        if traitCollection.userInterfaceStyle == .dark {
+            segmentControlTopApps.selectedSegmentTintColor = .darkGray
+            segmentControlTopApps.backgroundColor = .black
+            segmentControlTopApps.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.white], for: .normal)
+            view.backgroundColor = .black
+        } else {
+            segmentControlTopApps.selectedSegmentTintColor = .white
+            segmentControlTopApps.backgroundColor = UIColor.init(red: 239, green: 239, blue: 240, alpha: 1.0)
+            view.backgroundColor = .white
+            segmentControlTopApps.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.black], for: .normal)
+        }
+    }
 }
+
