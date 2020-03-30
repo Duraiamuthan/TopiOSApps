@@ -128,11 +128,15 @@ class TopAppResultsViewController: UIViewController,UISearchBarDelegate,UITableV
     
     // It filters the data based on searcy key
     func filter(searchKey:String) -> () {
-        if segmentControlTopApps.selectedSegmentIndex == 0 {
-            apps = self.appsOriginal?.filter({$0.imName.label.localizedCaseInsensitiveContains(searchKey)})
+
+        if searchKey.trim().count == 0 {
+            apps = self.appsOriginal
+        }
+        else if segmentControlTopApps.selectedSegmentIndex == 0 {
+            apps = self.appsOriginal?.filter({$0.imName.label.localizedCaseInsensitiveContains(searchKey.trim())})
         }
         else{
-            apps = self.appsOriginal?.filter({$0.category.attributes.label.localizedCaseInsensitiveContains(searchKey)})
+            apps = self.appsOriginal?.filter({$0.category.attributes.label.localizedCaseInsensitiveContains(searchKey.trim())})
         }
         self.tblViewiOSAppFilterResults.reloadData()
     }
@@ -156,11 +160,40 @@ class TopAppResultsViewController: UIViewController,UISearchBarDelegate,UITableV
     }
     
     // MARK: - Searchbar methods
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if let key = searchBar.text {
+   func searchBar(_ searchBar: UISearchBar,
+                  textDidChange searchText: String){
+        if let key = searchBar.text?.trim() {
             self.filter(searchKey: key)
-            searchBar.resignFirstResponder()
         }
+    }
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar){
+        // show cancel button besides search bar
+        searchBariOSAppFilter.showsCancelButton=true
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar){
+        if let key = searchBar.text?.trim() {
+            self.filter(searchKey: key)
+        }
+        // hide cancel button besides search bar
+        searchBariOSAppFilter.showsCancelButton=false
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        // hide cancel button besides search bar
+        searchBariOSAppFilter.showsCancelButton=false
+        
+        //hide the keyboard
+        searchBar.resignFirstResponder()
+        
+        //
+        searchBar.text=""
+        self.filter(searchKey: "")
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        //hide the keyboard
+        searchBar.resignFirstResponder()
     }
     
     func setPlaceHolderText(){
@@ -188,6 +221,13 @@ class TopAppResultsViewController: UIViewController,UISearchBarDelegate,UITableV
         
         // Setting app name
         cell.lblAppName!.text = appMeta?.imName.label
+        
+        // Check if there are any images
+        if((appMeta?.imImage.count)!>0){
+            
+        //Setting image height from API results
+        let heightOfImage:String = appMeta?.imImage[0].attributes.height ?? "53"
+        cell.setImageHeight(height: Float(heightOfImage)!)
 
         // Setting placeholder image for lazing loading of images
         let placeholderImage: UIImage = UIImage(named: AppConstants.lazyLoadingDefaultImageName)!
@@ -196,6 +236,9 @@ class TopAppResultsViewController: UIViewController,UISearchBarDelegate,UITableV
 
         // Download the image
         cell.imgAppIcon.downloadImageFrom(link: appMeta?.imImage[0].label, contentMode: UIView.ContentMode.scaleAspectFit)
+        
+        }
+        
         // Dark mode support
         if traitCollection.userInterfaceStyle == .dark {
           cell.lblAppName.backgroundColor = .black
