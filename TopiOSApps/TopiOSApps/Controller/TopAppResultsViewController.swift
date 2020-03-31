@@ -46,16 +46,6 @@ class TopAppResultsViewController: UIViewController,UISearchBarDelegate,UITableV
             self.tblViewiOSAppFilterResults.backgroundColor = .white
             self.view.backgroundColor = .white
         }
-        
-        //Notification center
-        let nc = NotificationCenter.default
-        
-        //Adding observer for server related connection error
-        nc.addObserver(self, selector: #selector(onErrorFetchingServerData(_:)), name: Notification.Name(AppConstants.errorFetchingServerDataNotificationName), object: nil)
-        
-        //Adding observer for data error
-        nc.addObserver(self, selector: #selector(onDataError(_:)), name: Notification.Name(AppConstants.errorWithDataNotificationName), object: nil)
-        
     }
     
     // MARK: - Segues
@@ -67,37 +57,6 @@ class TopAppResultsViewController: UIViewController,UISearchBarDelegate,UITableV
         }
     }
     
-    // MARK: - Notification center receipient methods
-    
-    // For handling network related error
-    @objc func onErrorFetchingServerData(_ notification:Notification) {
-        let err =  notification.object as? Error
-        
-        let errorCode = (err as NSError?)?.code
-        
-        print("ErrorCode:\(String(describing: errorCode))")
-        
-        let alert = UIAlertController(title: AppConstants.errorAlertTitle, message: AppConstants.errorMessageNetwork, preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: AppConstants.errorAlertButton, style: UIAlertAction.Style.default, handler: nil))
-        
-        DispatchQueue.main.async() {
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
-    
-    //For handling data related error
-    @objc func onDataError(_ notification:Notification) {
-        let alert = UIAlertController(title: AppConstants.errorAlertTitle, message: AppConstants.errorMessageData, preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: AppConstants.errorAlertButton, style: UIAlertAction.Style.default, handler: nil))
-        
-        DispatchQueue.main.async() {
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
-    
-    
     // MARK: - Data for tableview
     
     // It brings the app related data
@@ -107,23 +66,32 @@ class TopAppResultsViewController: UIViewController,UISearchBarDelegate,UITableV
             self.showSpinner(onView: self.view)
         }
         
-        GetAppCatalog.GetListOfApps { Entries in
+        GetAppCatalog.GetListOfApps(completionSuccessHandler: { Entries in
             self.filteredAppList=Entries;
             self.appsList=Entries;
             DispatchQueue.main.async() {
-                self.view.endEditing(true)
-                // if pull to refresh is enabled stop it
-                if refersh {
-                    self.refreshControl?.endRefreshing()
-                }
-                else {
-                    //Hide Spinner
-                    self.removeSpinner()
-                }
-                //reload the table view
-                self.tblViewiOSAppFilterResults.reloadData()
+                        self.view.endEditing(true)
+                        // if pull to refresh is enabled stop it
+                        if refersh {
+                            self.refreshControl?.endRefreshing()
+                        }
+                        else {
+                            //Hide Spinner
+                            self.removeSpinner()
+                        }
+                        //reload the table view
+                        self.tblViewiOSAppFilterResults.reloadData()
+                    }
+        }) { Error in
+            //Hide Spinner
+            self.removeSpinner()
+            if let err = Error{
+                self.showNetworkError()
             }
-        };
+            else{
+                self.showDataError()
+            }
+        }
     }
     
     // It filters the data based on searcy key
@@ -140,6 +108,29 @@ class TopAppResultsViewController: UIViewController,UISearchBarDelegate,UITableV
         }
         self.tblViewiOSAppFilterResults.reloadData()
     }
+    
+    // For handling network related error
+       func showNetworkError() {
+          
+           let alert = UIAlertController(title: AppConstants.errorAlertTitle, message: AppConstants.errorMessageNetwork, preferredStyle: .alert)
+           
+           alert.addAction(UIAlertAction(title: AppConstants.errorAlertButton, style: UIAlertAction.Style.default, handler: nil))
+           
+           DispatchQueue.main.async() {
+               self.present(alert, animated: true, completion: nil)
+           }
+       }
+       
+       //For handling data related error
+       func showDataError() {
+           let alert = UIAlertController(title: AppConstants.errorAlertTitle, message: AppConstants.errorMessageData, preferredStyle: .alert)
+           
+           alert.addAction(UIAlertAction(title: AppConstants.errorAlertButton, style: UIAlertAction.Style.default, handler: nil))
+           
+           DispatchQueue.main.async() {
+               self.present(alert, animated: true, completion: nil)
+           }
+       }
     
     // Mark:- Segment methods
     @IBAction func segmentSelection(sender:UISegmentedControl){

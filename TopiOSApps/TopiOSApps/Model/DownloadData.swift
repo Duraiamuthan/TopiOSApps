@@ -11,29 +11,25 @@ import Foundation
 class DownloadData: NSObject {
     
     //gets JSON data
-    static func getData(completion:@escaping (Data?) -> ()) {
+    static func getData(completionSuccessHandler:@escaping (Data?) -> (),completionErrorHandler:@escaping(NSError?) -> ()){
         let url = URL(string:AppConstants.dataURL)
         let task = URLSession.shared.dataTask(with: url!) {(data, response, error ) in
             guard error != nil else{
                 DownloadData .saveToJsonFile(jsonData: data!);
-                completion(data);
+                completionSuccessHandler(data);
                 return
             }
-                // Post error as notification
-                let nc = NotificationCenter.default
-                nc.post(name: Notification.Name(AppConstants.errorFetchingServerDataNotificationName), object: error)
+               
                 
                 // latest copy of data stored in Documents directory
                 if let documentsData = DownloadData.getDataDocumentsDirectory() {
-                    completion(documentsData)
+                    completionSuccessHandler(documentsData)
                 }
                 // Backup copy from app bundle
                 else if let bundleData = DownloadData.getDataBundle() {
-                    completion(bundleData)
+                    completionSuccessHandler(bundleData)
                 }
-                else{
-                    completion(nil);
-                }
+                completionErrorHandler(error as NSError?)
        }
        task.resume()
     }
