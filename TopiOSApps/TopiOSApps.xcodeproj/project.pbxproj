@@ -16,9 +16,9 @@
 		45BD0B34243134DE0073342B /* TopiOSAppsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BD0B33243134DE0073342B /* TopiOSAppsTests.swift */; };
 		45BD0B3F243134DF0073342B /* TopiOSAppsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BD0B3E243134DF0073342B /* TopiOSAppsUITests.swift */; };
 		45BD0B4D24313B280073342B /* AppDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BD0B4C24313B280073342B /* AppDetailViewController.swift */; };
-		45BD0B5524317D1E0073342B /* topApps.json in Resources */ = {isa = PBXBuildFile; fileRef = 45BD0B5424317D1E0073342B /* topApps.json */; };
-		45BD0B5624317D1E0073342B /* topApps.json in Resources */ = {isa = PBXBuildFile; fileRef = 45BD0B5424317D1E0073342B /* topApps.json */; };
-		45BD0B5724317D1E0073342B /* topApps.json in Resources */ = {isa = PBXBuildFile; fileRef = 45BD0B5424317D1E0073342B /* topApps.json */; };
+		45BD0B5524317D1E0073342B /* TopApps.json in Resources */ = {isa = PBXBuildFile; fileRef = 45BD0B5424317D1E0073342B /* TopApps.json */; };
+		45BD0B5624317D1E0073342B /* TopApps.json in Resources */ = {isa = PBXBuildFile; fileRef = 45BD0B5424317D1E0073342B /* TopApps.json */; };
+		45BD0B5724317D1E0073342B /* TopApps.json in Resources */ = {isa = PBXBuildFile; fileRef = 45BD0B5424317D1E0073342B /* TopApps.json */; };
 		45BD0B5924317D490073342B /* AppDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BD0B5824317D480073342B /* AppDetailTableViewCell.swift */; };
 		45BD0B5A24317D490073342B /* AppDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BD0B5824317D480073342B /* AppDetailTableViewCell.swift */; };
 		45BD0B5B24317D490073342B /* AppDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BD0B5824317D480073342B /* AppDetailTableViewCell.swift */; };
@@ -78,7 +78,7 @@
 		45BD0B3E243134DF0073342B /* TopiOSAppsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopiOSAppsUITests.swift; sourceTree = "<group>"; };
 		45BD0B40243134DF0073342B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45BD0B4C24313B280073342B /* AppDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailViewController.swift; sourceTree = "<group>"; };
-		45BD0B5424317D1E0073342B /* topApps.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = topApps.json; sourceTree = "<group>"; };
+		45BD0B5424317D1E0073342B /* TopApps.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TopApps.json; sourceTree = "<group>"; };
 		45BD0B5824317D480073342B /* AppDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDetailTableViewCell.swift; sourceTree = "<group>"; };
 		45BD0B5C24317D680073342B /* JsonModelClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonModelClass.swift; sourceTree = "<group>"; };
 		45BD0B5D24317D680073342B /* GetAppCatalog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAppCatalog.swift; sourceTree = "<group>"; };
@@ -208,7 +208,7 @@
 		45BD0B5324317CDC0073342B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				45BD0B5424317D1E0073342B /* topApps.json */,
+				45BD0B5424317D1E0073342B /* TopApps.json */,
 				45BD0B25243134DE0073342B /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -331,7 +331,7 @@
 				45BD0B29243134DE0073342B /* LaunchScreen.storyboard in Resources */,
 				45BD0B26243134DE0073342B /* Assets.xcassets in Resources */,
 				45BD0B24243134DD0073342B /* Main.storyboard in Resources */,
-				45BD0B5524317D1E0073342B /* topApps.json in Resources */,
+				45BD0B5524317D1E0073342B /* TopApps.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,7 +339,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45BD0B5624317D1E0073342B /* topApps.json in Resources */,
+				45BD0B5624317D1E0073342B /* TopApps.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,7 +347,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45BD0B5724317D1E0073342B /* topApps.json in Resources */,
+				45BD0B5724317D1E0073342B /* TopApps.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
