@@ -14,14 +14,14 @@ class GetAppCatalog: NSObject {
     static func GetListOfApps(completion:@escaping ([Entry]?) -> ()) {
         DownloadData.getData { (Data) in
                  do{
-                            if Data != nil{
-                             let model =  try JSONDecoder().decode(AppCatalogJSONResponseModel.self, from: Data!)
-                                completion(model.feed.entry)
-                            }else{
-                               let nc = NotificationCenter.default
-                               nc.post(name: Notification.Name(AppConstants.errorFetchingServerDataNotificationName), object: nil)
-                               completion(nil)
-                            }
+                    guard let dataApps = Data else{
+                        let nc = NotificationCenter.default
+                        nc.post(name: Notification.Name(AppConstants.errorFetchingServerDataNotificationName), object: nil)
+                        completion(nil)
+                        return
+                    }
+                    let model =  try JSONDecoder().decode(AppCatalogJSONResponseModel.self, from: dataApps)
+                    completion(model.feed.entry)
                  }
                  catch{
                     // Send notification for data error

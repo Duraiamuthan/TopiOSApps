@@ -14,31 +14,26 @@ class DownloadData: NSObject {
     static func getData(completion:@escaping (Data?) -> ()) {
         let url = URL(string:AppConstants.dataURL)
         let task = URLSession.shared.dataTask(with: url!) {(data, response, error ) in
-            if(error != nil){
-                
+            guard error != nil else{
+                DownloadData .saveToJsonFile(jsonData: data!);
+                completion(data);
+                return
+            }
                 // Post error as notification
                 let nc = NotificationCenter.default
                 nc.post(name: Notification.Name(AppConstants.errorFetchingServerDataNotificationName), object: error)
-               
-               // Dcouments cache
-               let documentsData = DownloadData.getDataDocumentsDirectory()
-               
-               // Backup copy
-               let bundleData = DownloadData.getDataBundle()
                 
-                if(documentsData != nil){
+                // latest copy of data stored in Documents directory
+                if let documentsData = DownloadData.getDataDocumentsDirectory() {
                     completion(documentsData)
                 }
-                else if(bundleData != nil){
+                // Backup copy from app bundle
+                else if let bundleData = DownloadData.getDataBundle() {
                     completion(bundleData)
                 }
                 else{
                     completion(nil);
                 }
-           }else{
-                DownloadData .saveToJsonFile(jsonData: data!);
-                completion(data);
-            }
        }
        task.resume()
     }
